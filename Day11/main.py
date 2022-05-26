@@ -17,14 +17,34 @@
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
 
+import random
+from art import logo
 
 
+#Create a list of cards
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def deal_cards():
+    print(logo)
+    players_hand = random.choices(cards, k=2)
+    player_total = sum(players_hand)
+    computer_hand = random.choices(cards, k=2)
+    computer_total = sum(computer_hand)
+    print(f"Your cards: {players_hand}, current score: {player_total}")
+    print(f"Computer's first card: {computer_total}")
 
 
+def check_winner():
+    return(print("You win"))
 
 
-
-
+lets_play = True 
+while lets_play:
+    if input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+        deal_cards()
+    else:
+        lets_play = False
+        print("Thanks for playing")
 
 
 
