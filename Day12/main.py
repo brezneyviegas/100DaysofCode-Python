@@ -2,51 +2,59 @@
 
 # Include an ASCII art logo.
 from art import logo 
-print(logo)
-print("I'm thinking of a number between 1 and 100")
 
 #Create a Random number will be used for comparering with user input
 import random
 random_number = random.randint(1,100)
-print(random_number)
+
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
 
 #Function to get user to pick difficulty 
 def difficulty():
     user_input = input("Choose a dificulty: Type 'easy' or 'hard': ")
     if user_input == "easy":
-        attempts = 10
-        return attempts
+        return EASY_LEVEL_TURNS
     else:
-        attempts = 5
-        return attempts
-
-# Allow the player to submit a guess for a number between 1 and 100.
-def guess():
-    user_guess = int(input("Make a guess: "))
-    return user_guess
+        return HARD_LEVEL_TURNS
     
 # Check user's guess against actual answer. Print "Too high." or "Too low." depending on the user's answer. 
-def compare(user_guess, random_number):
+def compare(user_guess, random_number, turns):
     # If they got the answer correct, show the actual answer to the player.
-    if user_guess == random_number:
-        return(f"You got the correct number {user_guess}")
-    elif user_guess > random_number:
-        return("Too High \nGuess again" )
+    
+    if user_guess > random_number:
+        print("Too High" )
+        return turns - 1
     elif user_guess < random_number:
-        return("Too Low \nGuess again")
+        print("Too Low")
+        return turns - 1
+    else:
+        print(f"You got the correct number {user_guess}")
 
 # Track the number of turns remaining.
+def game():
+      print(logo)
+  #Choosing a random number between 1 and 100.
+      print("Welcome to the Number Guessing Game!")
+      print("I'm thinking of a number between 1 and 100.")
+      print(f"Pssst, the correct answer is {random_number}") 
 
-attempts = difficulty()
-game_is_over = False
+      turns = difficulty()
+  #Repeat the guessing functionality if they get it wrong.
+      user_guess = 0
+      while user_guess != random_number:
+        print(f"You have {turns} attempts remaining to guess the number.")
 
-while not game_is_over:
-    for i in range(attempts, -1, -1):
-        if i != 0:
-            print(f"You have {i} attempts remaning to guess the number")
-            print(compare(guess(), random_number))
-        else:
-            game_is_over = True 
-            print("You've run out of guesses, you lose!")
-# Include two different difficulty levels (e.g., 10 guesses in easy mode, only 5 guesses in hard mode).
+    #Let the user guess a number.
+        user_guess = int(input("Make a guess: "))
 
+    #Track the number of turns and reduce by 1 if they get it wrong.
+        turns = compare(user_guess, random_number, turns)
+        if turns == 0:
+          print("You've run out of guesses, you lose.")
+          return
+        elif user_guess != random_number:
+          print("Guess again.")
+
+
+game()
