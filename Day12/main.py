@@ -1,7 +1,7 @@
 #Number Guessing Game Objectives:
 
 # Include an ASCII art logo.
-from art import logo 
+from art import logo, win
 
 #Create a Random number will be used for comparering with user input
 import random
@@ -30,6 +30,7 @@ def compare(user_guess, random_number, turns):
         return turns - 1
     else:
         print(f"You got the correct number {user_guess}")
+        print(win)
 
 # Track the number of turns remaining.
 def game():
@@ -40,13 +41,15 @@ def game():
       print(f"Pssst, the correct answer is {random_number}") 
 
       turns = difficulty()
-  #Repeat the guessing functionality if they get it wrong.
+      #Repeat the guessing functionality if they get it wrong.
       user_guess = 0
       while user_guess != random_number:
         print(f"You have {turns} attempts remaining to guess the number.")
 
     #Let the user guess a number.
         user_guess = int(input("Make a guess: "))
+        if user_guess < 1 or user_guess > 100:
+            print("Please enter a number between 1 and 100")
 
     #Track the number of turns and reduce by 1 if they get it wrong.
         turns = compare(user_guess, random_number, turns)
