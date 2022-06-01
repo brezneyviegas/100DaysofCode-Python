@@ -5,7 +5,7 @@ from art import logo, win
 
 #Create a Random number will be used for comparering with user input
 import random
-random_number = random.randint(1,100)
+
 
 EASY_LEVEL_TURNS = 10
 HARD_LEVEL_TURNS = 5
@@ -33,6 +33,8 @@ def compare(user_guess, random_number, turns):
         print(win)
 
 # Track the number of turns remaining.
+
+
 def game():
       print(logo)
   #Choosing a random number between 1 and 100.
@@ -60,4 +62,10 @@ def game():
           print("Guess again.")
 
 
-game()
+game_is_over = False
+while not game_is_over:
+    random_number = random.randint(1,100)
+    game()
+    play_again = input("Would you like to play again? Yes or No: ").lower
+    if play_again != "yes":
+        game_is_over = True
